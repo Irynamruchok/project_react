@@ -1,0 +1,7 @@
+.Background{
+    width: 100vw;
+    background-color: antiquewhite;
+    display: flex;
+    flex-direction: column;
+
+}
