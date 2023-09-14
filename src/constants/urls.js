@@ -1,6 +1,6 @@
 const baseURL = process.env.REACT_APP_API
 
-const movies = '/movie/popular'
+const movies = '/discover/movie'
 const genres = '/genre/movie/list'
 const imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 const urls = {

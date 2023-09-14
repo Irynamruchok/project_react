@@ -8,41 +8,33 @@ import {useSearchParams} from "react-router-dom";
 
 const MoviesList = () => {
 
-    const [searchParams, setSearchParams] = useSearchParams();
-    const currentPage = parseInt(searchParams.get('page')) || 1
-
-
+    const [query, setQuery] = useSearchParams({page: '1'});
+    const currentPage = +query.get('page')
     const {movies} = useSelector(state => state.movies);
 
     const dispatch = useDispatch();
 
-    useEffect(() =>{
-        console.log("Component updated with currentPage:", currentPage);
-        dispatch(moviesActions.getAll())
-    },[currentPage])
+    useEffect(() => {
+        dispatch(moviesActions.getAll({page: currentPage}))
+    }, [dispatch, query])
 
     const getNextPage = () => {
-        const nextPage = currentPage + 1;
-        setSearchParams({ page: nextPage.toString() });
-        dispatch(moviesActions.getAll(nextPage));
+
+        setQuery(() => ({page:currentPage + 1}));
+
     };
 
-        const getPrevPage = () => {
-    { if (currentPage > 1) {
-        setSearchParams({ page: (currentPage - 1).toString() });
-    }}  }
-    // }
-    // const getNextPage = () => {
-    //     const nextPage = currentPage + 1;
-    //     console.log(nextPage)
-    //     dispatch(moviesActions.getCurrentPage(nextPage))
-    // }
+    const getPrevPage = () => {
+        setQuery(() => ({page:currentPage - 1}));
+    };
+
+
 
     return (
         <div>
             {movies.map((movie)=> <MoviesListCard key={movie.id} movie={movie}/>)}
             <div>
-                <button onClick={getPrevPage}disabled={currentPage === 1}>Prev</button>
+                <button onClick={getPrevPage} disabled={currentPage === 1}>Prev</button>
                 <button onClick={getNextPage}>Next</button>
             </div>
         </div>
