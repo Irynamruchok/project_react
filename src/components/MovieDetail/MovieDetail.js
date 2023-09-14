@@ -11,15 +11,13 @@
 // };
 //
 // export default MovieDetail;
-// import React from 'react';
-//
-// const MovieDetail = ({detail}) => {
-//     const {budget} = detail
-//     return (
-//         <div>
-//             {budget}
-//         </div>
-//     );
-// };
-//
-// export default MovieDetail;
+import React from 'react';
+
+const MovieDetail = ({detail}) => {
+    const {budget} = detail
+    return (
+        <div>
+            {budget}
+        </div>
+    )}
+ export default MovieDetail;

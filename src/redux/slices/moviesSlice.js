@@ -5,19 +5,19 @@ import {moviesService} from "../../services/moviesService";
 
 
 
+
 const initialState = {
     movie:null,
+    currentPage:1,
     movies:[],
     error:null
 }
 const getAll = createAsyncThunk(
     'moviesSlice/getAll',
-        async (_,{rejectWithValue}) => {
+        async (page,{rejectWithValue}) => {
             try {
-                const response = await moviesService.getAll();
-                const moviesData = response.data
-                const movies = moviesData.results
-                return movies
+                const response = await moviesService.getAll(page);
+                return  response.data.results
             }catch (e) {
                 const error = e
                 return rejectWithValue(error.response)
@@ -44,6 +44,21 @@ const getDetails = createAsyncThunk(
     }
 )
 
+const getCurrentPage = createAsyncThunk(
+    'moviesSlice/getCurrentPage',
+async (_,{rejectedWithValue,getState}) => {
+        try {
+            const { currentPage } = getState().movies;
+            const response = await moviesService.getAll(currentPage)
+            const page = response.data.page
+            console.log(page)
+            return page
+            // console.log(page,'pojkhj')
+        }catch (e) {
+
+        }
+}
+)
 const moviesSlice = createSlice({
     name: 'moviesSlice',
     initialState,
@@ -53,6 +68,10 @@ const moviesSlice = createSlice({
     extraReducers: builder => builder
         .addCase(getAll.fulfilled, (state, action) => {
             state.movies = action.payload
+            // state.currentPage = action.payload
+        })
+        .addCase(getCurrentPage.fulfilled,(state, action) => {
+            state.currentPage = action.payload
         })
         .addCase(getAll.rejected,(state, action) => {
             state.error = action.payload
@@ -60,16 +79,20 @@ const moviesSlice = createSlice({
         .addCase(getDetails.fulfilled,(state, action) => {
             state.movie = action.payload
         })
+
 })
 
 const {reducer: moviesReducer, actions} =moviesSlice
 const moviesActions = {
     ...actions,
     getAll,
-    getDetails
+    getDetails,
+    getCurrentPage
 }
+
 
 export {
     moviesReducer,
-    moviesActions
+    moviesActions,
+
 }

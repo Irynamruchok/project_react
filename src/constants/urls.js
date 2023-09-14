@@ -2,7 +2,7 @@ const baseURL = process.env.REACT_APP_API
 
 const movies = '/movie/popular'
 const genres = '/genre/movie/list'
-
+const imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 const urls = {
     movies:{
         base: movies,
@@ -20,5 +20,6 @@ const urls = {
 
 export {
     baseURL,
-    urls
+    urls,
+    imageBaseUrl
 }
