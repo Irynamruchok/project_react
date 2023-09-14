@@ -14,7 +14,7 @@ const initialState = {
 }
 const getAll = createAsyncThunk(
     'moviesSlice/getAll',
-        async (page,{rejectWithValue}) => {
+        async ({page},{rejectWithValue}) => {
             try {
                 const response = await moviesService.getAll(page);
                 return  response.data.results
@@ -68,11 +68,7 @@ const moviesSlice = createSlice({
     extraReducers: builder => builder
         .addCase(getAll.fulfilled, (state, action) => {
             state.movies = action.payload
-            // state.currentPage = action.payload
         })
-        // .addCase(getCurrentPage.fulfilled,(state, action) => {
-        //     state.currentPage = action.payload
-        // })
         .addCase(getAll.rejected,(state, action) => {
             state.error = action.payload
         })

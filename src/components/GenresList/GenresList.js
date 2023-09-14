@@ -13,6 +13,7 @@ const GenresList = () => {
         dispatch(genresActions.getAll())
     },[])
 
+
     return (
         <div>
             { genres.map((genre) => <GenresListCard key={genre.id} genre={genre}/>)}
