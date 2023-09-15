@@ -21,18 +21,9 @@ const MovieDetails = () => {
             });
     },[movieId])
     console.log(details,'ttuvhgyt')
- // const {movie} = useNavigate()
 
-    // const {movie} = useSelector((state) => state.movie)
-    // console.log(movie)
-    // const dispatch = useDispatch()
-    // useEffect(() => {
-    //     dispatch(moviesActions.getDetails(movieId))
-    // },[movieId,dispatch])
-    //
-    // console.log('ttyyy')
 
-    const handleSmallGenreChoose = () => {
+    const handleGenreChooseButton = () => {
         dispatch(setGenreId())
     }
 
@@ -51,7 +42,7 @@ const MovieDetails = () => {
                     <div>Genres:{details.genres.map((genre) =>{
                         return ( <div>
 
-                            <Link to={'/moviesByGenre'} onClick={handleSmallGenreChoose}>
+                            <Link to={'/moviesByGenre'} onClick={handleGenreChooseButton}>
                                 <div>{genre.name}</div>
                             </Link>
                         </div>)
@@ -60,14 +51,6 @@ const MovieDetails = () => {
                     <p>Rating:{details.vote_average}</p>
                 </div>
             ) :(<p>Loading...</p>)}
-
-
-
-
-            {/*{details.budget}*/}
-            {/*{details.original_titles}*/}
-            {/*{details.map((detail)=><MovieDetail detail={detail}/>)}*/}
-            {/*{movie && <MovieDetail  detail={movie}/>}*/}
         </div>
     );
 };

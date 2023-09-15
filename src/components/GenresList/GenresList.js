@@ -20,5 +20,5 @@ const GenresList = () => {
         </div>
     );
 };
-// Array.isArray(genres) &&
+
 export default GenresList;

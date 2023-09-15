@@ -33,9 +33,6 @@ const genresSlice = createSlice({
         .addCase(getAll.fulfilled,(state, action) =>{
             state.genres = action.payload
         })
-    // .addCase(getAll.rejected,(state, action) => {
-    //     state.error = action.payload
-    // })
 })
 const {reducer:genresReducer,actions} = genresSlice
 
